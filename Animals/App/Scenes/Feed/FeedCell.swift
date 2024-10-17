@@ -22,7 +22,7 @@ class FeedCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .preferredFont(forTextStyle: .headline)
+        label.font = .preferredFont(forTextStyle: .subheadline)
         label.text = "Name"
         return label
     }()
@@ -36,12 +36,31 @@ class FeedCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(animal: Animal) {
+        nameLabel.text = animal.name
+        
+        switch animal.type {
+        case .mamifero:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemPurple, renderingMode: .alwaysOriginal)
+        case .reptil:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+        case .aves:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemBrown, renderingMode: .alwaysOriginal)
+        case .insetos:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+        case .peixes:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
+        case .outros:
+            avatarImageView.image = UIImage(systemName: animal.image)?.withTintColor(.systemIndigo, renderingMode: .alwaysOriginal)
+        }
+    }
+    
     private func setupView() {
         setHierarchy()
         setConstraints()
     }
     
-    private func setHierarchy () {
+    private func setHierarchy() {
         addSubview(avatarImageView)
         addSubview(nameLabel)
     }
